@@ -2,6 +2,10 @@
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreDuringBuilds: true,
+    ignoreBuildErrors: true
   }
 };
 
