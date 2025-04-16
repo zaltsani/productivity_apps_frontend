@@ -3,7 +3,7 @@ import { format, parseJSON } from "date-fns";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 export default function AgendaToDo({ data }) {
-  data = data.sort((a, b) => parseJSON(a.date_time) - parseJSON(b.date_time))
+  data = data?.sort((a, b) => parseJSON(a?.date_time) - parseJSON(b?.date_time))
   const notFinishedEvents = data?.filter(e => e.status != 'finished')
   const dateEvents = []
   notFinishedEvents?.forEach(element => {

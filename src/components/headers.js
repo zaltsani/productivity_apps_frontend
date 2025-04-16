@@ -43,7 +43,7 @@ export default function Header({ listBreadcrumb }) {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <div className="flex justify-between gap-4 items-center cursor-pointer">
-                    <span>{session.user.username}</span>
+                    <span className="hidden md:block">{session.user.username}</span>
                     <ChevronDown />
                   </div>
                 </DropdownMenuTrigger>

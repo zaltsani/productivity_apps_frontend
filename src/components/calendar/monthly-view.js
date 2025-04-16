@@ -61,7 +61,7 @@ export default function MonthlyView ({ currentDate, setCurrentDate, events, refe
                             {todo.title}
                           </div>  
                         ))}
-                        {eventThisDay.length > 3 && (
+                        {!!eventThisDay && eventThisDay.length > 3 && (
                           <div className="pl-1 text-xs truncate text-muted-foreground">+{eventThisDay.length - 3} more</div>
                         )}
                       </div>

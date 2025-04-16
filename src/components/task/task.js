@@ -53,7 +53,7 @@ export default function Task({ task, refetch }) {
               >
                 <PlusIcon />
               </Button>
-              <DialogDeleteTask task={Task}refetch={refetch} >
+              <DialogDeleteTask task={Task} refetch={refetch} >
                 <Button
                   size="icon"
                   variant="destructive"
@@ -80,6 +80,7 @@ export default function Task({ task, refetch }) {
             </div>
           ))}
         </CardContent>
+        <CardFooter></CardFooter>
         {/* <CardFooter>
           <div
             onClick={async () => {

@@ -33,7 +33,9 @@ export function SignUpForm({
     const response = await postRegister(username, password1, password2)
     console.log("response", response)
     if (response.status === 400) {
-      setError(response.response.data.non_field_errors[0])
+      if (response?.response?.non_field_errors) {
+        setError(response?.response?.data.non_field_errors[0])
+      }
     } else if (response.status === 201) {
       router.push('/login')
     }
