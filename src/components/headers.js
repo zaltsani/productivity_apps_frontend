@@ -24,7 +24,7 @@ export default function Header({ listBreadcrumb }) {
                 {listBreadcrumb && listBreadcrumb.map((item, index) => {
                   if (index+1 !== listBreadcrumb.length) { return (
                     <Fragment key={index}>
-                      <BreadcrumbItem>
+                      <BreadcrumbItem className='hidden md:block'>
                         <BreadcrumbLink href={item.url}>{item.title}</BreadcrumbLink>
                       </BreadcrumbItem>
                       <BreadcrumbSeparator className="hidden md:block"/>

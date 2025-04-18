@@ -6,12 +6,14 @@ export default function GlobalError() {
   return (
     <html>
       <body>
-        <Image
-          src="/error.gif"
-          alt="logo"
-          width={480}
-          height={360}
-        />
+        <div className="w-screen h-screen flex items-center justify-center">
+          <Image
+            src="/error.gif"
+            alt="logo"
+            width={480}
+            height={360}
+          />
+        </div>
       </body>
     </html>
   )

@@ -1,6 +1,6 @@
 'use client'
 
-import { Calendar, Home, SquareCheck, Inbox, Search, Settings, ListTodo, AlarmClockCheck, GalleryVerticalEnd, PencilIcon, Wallet, Notebook } from "lucide-react"
+import { Calendar, Home, SquareCheck, Inbox, Search, Settings, ListTodo, AlarmClockCheck, GalleryVerticalEnd, PencilIcon, Wallet, Notebook, Wand } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -66,6 +66,11 @@ const items = [
   //   url: "#",
   //   icon: Search,
   // },
+  {
+    title: "Homework for Life",
+    url: "/story",
+    icon: Wand,
+  },
   {
     title: "Settings",
     url: "#",

@@ -33,6 +33,7 @@ export const updateTaskBody = async ( task ) => {
   const res = await AxiosInstance.patch(`api/v1/task/body/${task.id}/`,
     task
   )
+  return res
 }
 
 export const updateTaskTitle = async ( task ) => {
@@ -200,4 +201,29 @@ export const deleteTransaction = async(data) => {
 export const fetchDailyTransaction = async() => {
   const res = await AxiosInstance.get(`api/v1/finance/daily-transaction/`)
   return res.data
+}
+
+
+
+// // // //
+// Story
+// // // //
+export const fetchStories = async() => {
+  const res = await AxiosInstance.get(`api/v1/story/`)
+  return res.data
+}
+
+export const postStory = async(data) => {
+  const res = await AxiosInstance.post(`api/v1/story/`, data)
+  return res
+}
+
+export const patchStory = async(data) => {
+  const res = await AxiosInstance.patch(`api/v1/story/${data.id}/`, data)
+  return res
+}
+
+export const deleteStory = async(storyId) => {
+  const res = await AxiosInstance.delete(`api/v1/story/${storyId}/`)
+  return res
 }

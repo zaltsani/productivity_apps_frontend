@@ -5,9 +5,12 @@ import Header from "@/components/headers"
 import { DropdownMenu } from "@/components/ui/dropdown-menu"
 import { TextInput } from "@/components/ui/textarea"
 import { fetchArticleDetail, updateArticle } from "@/lib/data"
+import { CKEditor } from "@ckeditor/ckeditor5-react"
+import { Bold, ClassicEditor, Essentials, Heading, Indent, IndentBlock, Italic, Link, List, MediaEmbed, Paragraph, Table, Undo } from "ckeditor5"
 import { PlusIcon } from "lucide-react"
 import { Fragment, use, useEffect, useState } from "react"
 import { useMutation, useQuery } from "react-query"
+import { EditorContent, EditorRoot } from "novel";
 
 export default function Page({ params }) {
   const { id } = params
@@ -18,6 +21,7 @@ export default function Page({ params }) {
     { refetchOnWindowFocus: false, refetchOnMount: true, refetchOnReconnect: false, enabled: true },
   )
 
+  const [content, setContent] = useState(null)
   const [article, setArticle] = useState(null)
   useEffect(() => {
     setArticle(data)
@@ -51,6 +55,11 @@ export default function Page({ params }) {
       updateMutation.mutate(article)
     }
   }, [debouncedQuery])
+
+
+
+  // const extensions = [ starterKit, placeholder, tiptapLink, tiptapImage, updatedImage, taskList, taskItem, horizontalRule, aiHighlight, slashCommand, ]
+  const extensions = []
     
   return (
     <div className="w-full">
@@ -161,6 +170,49 @@ export default function Page({ params }) {
             </div>
         </div>
 
+      </div>
+      
+      <p>CKEDITOR</p>
+      <CKEditor
+        editor={ ClassicEditor }
+        config={ {
+          toolbar: [
+            'undo', 'redo', '|',
+            'heading', '|', 'bold', 'italic', '|',
+            'link', 'insertTable', 'mediaEmbed', '|',
+            'bulletedList', 'numberedList', 'indent', 'outdent'
+          ],
+          plugins: [
+            Bold,
+            Essentials,
+            Heading,
+            Indent,
+            IndentBlock,
+            Italic,
+            Link,
+            List,
+            MediaEmbed,
+            Paragraph,
+            Table,
+            Undo
+          ],
+          initialData: '<h1>Hello from CKEditor 5!</h1>',
+        } }
+      />
+      <div>Test</div>
+      <div className="mt-10">
+        <p>Novel Editor</p>
+        <EditorRoot>
+          <EditorContent
+            initialContent={content}
+            onUpdate={({ editor }) => {
+              const json = editor.getJSON();
+              setContent(json);
+            }}
+            extensions={extensions}
+          />
+          {/* <EditorContent></EditorContent> */}
+        </EditorRoot>
       </div>
     </div>
   )
