@@ -22,7 +22,6 @@ export function LineChart({ data }) {
   const today = new Date()
   const startDate = new Date(new Date().setDate(new Date().getDate() - 30))
 
-  const allDates = []
   for (let currentDate = new Date(startDate); currentDate <= today; currentDate.setDate(currentDate.getDate() + 1)) {
     if (!data.find(d => (d.date.getDate().toString() + d.date.getMonth().toString() + d.date.getYear().toString()) === (currentDate.getDate().toString() + currentDate.getMonth().toString() + currentDate.getYear().toString()))) {
       console.log("Data Found", data.find(d => d.date.getDate() === currentDate.getDate()))
@@ -34,9 +33,6 @@ export function LineChart({ data }) {
   }
 
   data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-
-  console.log("Line Chart Data", data)
-  console.log("Date", new Date())
 
 
   let xScale = scaleTime()

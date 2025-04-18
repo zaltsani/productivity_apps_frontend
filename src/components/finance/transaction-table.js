@@ -3,9 +3,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from ".
 import { Button } from "../ui/button";
 import { Pencil, Trash } from "lucide-react";
 import { deleteTransaction } from "@/lib/data";
+import { formatCurrency } from "@/lib/utils";
 
 export default function TransactionTable ({ transaction, refetchTransaction, refetchSummary, offset }) {
-  console.log(transaction.length)
   return (
     <Table>
       <TableHeader>
@@ -23,8 +23,8 @@ export default function TransactionTable ({ transaction, refetchTransaction, ref
         {transaction.length > 0 && transaction.map((item, index) => (
           <TableRow key={index}>
             <TableCell>{index+1+offset}</TableCell>
-            <TableCell>{item.amount}</TableCell>
-            <TableCell>{item.type}</TableCell>
+            <TableCell>{formatCurrency(item.amount.split(".")[0])}</TableCell>
+            <TableCell>{item.type.charAt(0).toUpperCase() + item.type.slice(1)}</TableCell>
             <TableCell>{item.category?.name}</TableCell>
             <TableCell>{format(new Date(item.date), "MMM dd, yyyy")}</TableCell>
             <TableCell>{item.description}</TableCell>
@@ -47,11 +47,11 @@ export default function TransactionTable ({ transaction, refetchTransaction, ref
             </TableCell>
           </TableRow>
         ))}
-        {transaction.length < 5 && Array.from({ length: 5 - transaction.length }).map((_, index) => (
+        {/* {transaction.length < 5 && Array.from({ length: 5 - transaction.length }).map((_, index) => (
           <TableRow key={index}>
             <TableCell>{index + transaction.length + offset + 1}</TableCell>
           </TableRow>
-        ))}
+        ))} */}
       </TableBody>
     </Table>
   )

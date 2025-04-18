@@ -169,51 +169,8 @@ export default function Page({ params }) {
               </button>
             </div>
         </div>
-
       </div>
       
-      <p>CKEDITOR</p>
-      <CKEditor
-        editor={ ClassicEditor }
-        config={ {
-          toolbar: [
-            'undo', 'redo', '|',
-            'heading', '|', 'bold', 'italic', '|',
-            'link', 'insertTable', 'mediaEmbed', '|',
-            'bulletedList', 'numberedList', 'indent', 'outdent'
-          ],
-          plugins: [
-            Bold,
-            Essentials,
-            Heading,
-            Indent,
-            IndentBlock,
-            Italic,
-            Link,
-            List,
-            MediaEmbed,
-            Paragraph,
-            Table,
-            Undo
-          ],
-          initialData: '<h1>Hello from CKEditor 5!</h1>',
-        } }
-      />
-      <div>Test</div>
-      <div className="mt-10">
-        <p>Novel Editor</p>
-        <EditorRoot>
-          <EditorContent
-            initialContent={content}
-            onUpdate={({ editor }) => {
-              const json = editor.getJSON();
-              setContent(json);
-            }}
-            extensions={extensions}
-          />
-          {/* <EditorContent></EditorContent> */}
-        </EditorRoot>
-      </div>
     </div>
   )
 }

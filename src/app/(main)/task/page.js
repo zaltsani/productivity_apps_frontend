@@ -3,7 +3,7 @@
 import Header from "@/components/headers"
 import Task from "@/components/task/task"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { addTask, fetchMe, fetchTask } from "@/lib/data"
 import { PlusIcon } from "lucide-react"
 import { useQuery } from "react-query"
@@ -23,12 +23,13 @@ export default function TaskPage() {
       <Header listBreadcrumb={listBreadcrumb} />
       <div className="my-0 sm:mx-10">
         <Card className="border-0">
-          <CardHeader className="text-3xl font-bold flex flex-col">
+          <CardHeader className="flex flex-col">
             <CardTitle>Task</CardTitle>
+            <CardDescription>Manage your task for better organizing</CardDescription>
             <div>
               <Button
                 size='sm'
-                variant='highlight'
+                variant='blue'
                 onClick={async() => {
                   const me = await fetchMe()
                   addTask(me)

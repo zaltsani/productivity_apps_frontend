@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { addCategory, addTransaction, fetchCategory, fetchMe } from "@/lib/data"
 import { useQuery } from "react-query"
 import { DateTimePicker } from "../ui/date-time-picker"
+import { Plus } from "lucide-react"
 
 export const AddTransactionDialog = ({ refetchTransaction, refetchSummary }) => {
   const [type, setType] = useState("expense")
@@ -26,7 +27,11 @@ export const AddTransactionDialog = ({ refetchTransaction, refetchSummary }) => 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Add Transaction</Button>
+        <Button
+          size="sm"
+          variant="blue"
+        >
+          <Plus /> Add Transaction</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -153,7 +158,6 @@ export const AddTransactionDialog = ({ refetchTransaction, refetchSummary }) => 
               type="submit"
               onClick={async() => {
                 const me = await fetchMe()
-                console.log("me", me)
                 const data = {
                   user: me.id,
                   amount: amount,
@@ -162,7 +166,6 @@ export const AddTransactionDialog = ({ refetchTransaction, refetchSummary }) => 
                   description: description,
                   category: category
                 }
-                console.log("Data", data)
                 addTransaction(data)
                 refetchTransaction()
                 refetchSummary()

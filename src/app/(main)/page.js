@@ -4,7 +4,7 @@ import ArticleCard from "@/components/article/article-card";
 import Header from "@/components/headers";
 import Task from "@/components/task/task";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { addArticle, addTask, fetchArticleList, fetchMe, fetchTask } from "@/lib/data";
 import { Fragment } from "react";
 import { useQuery } from "react-query";
@@ -32,8 +32,23 @@ export default function Home() {
 
         {/* Task Notes */}
         <Card>
-          <CardHeader className="text-lg font-semibold">
+          <CardHeader>
             <CardTitle>Task</CardTitle>
+            <CardDescription>Manage your task for better organizing</CardDescription>
+            <div>
+              <Button
+                variant="blue"
+                size="sm"
+                onClick={async() => {
+                  console.log("Add ")
+                  const me = await fetchMe()
+                  addTask(me)
+                  refetch()
+                }}
+              >
+                Add Task
+              </Button>
+            </div>
           </CardHeader>
           <CardContent className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[500px] overflow-y-auto">
             {!loadingTask && task.map(item => (
@@ -41,16 +56,6 @@ export default function Home() {
             ))}
           </CardContent>
           <CardFooter className="py-4">
-            <Button
-              onClick={async() => {
-                console.log("Add ")
-                const me = await fetchMe()
-                addTask(me)
-                refetch()
-              }}
-            >
-              Add Task
-            </Button>
           </CardFooter>
         </Card>
 
@@ -58,6 +63,20 @@ export default function Home() {
         <Card>
           <CardHeader>
             <CardTitle>Articles</CardTitle>
+            <CardDescription>Let's write article</CardDescription>
+            <div>
+              <Button
+                variant="blue"
+                size="sm"
+                onClick={async() => {
+                  const me = await fetchMe()
+                  addArticle(me)
+                  refetchArticles()
+                }}
+              >
+                Add Article
+              </Button>
+            </div>
           </CardHeader>
           <CardContent className="flex flex-col gap-4 mah-h-10">
             {articles && articles.map(article => (
@@ -67,15 +86,6 @@ export default function Home() {
             ))}
           </CardContent>
           <CardFooter>
-            <Button
-              onClick={async() => {
-                const me = await fetchMe()
-                addArticle(me)
-                refetchArticles()
-              }}
-            >
-              Add Article
-            </Button>
           </CardFooter>
         </Card>
       </div>
