@@ -236,8 +236,8 @@ export default function Page () {
           </div>
         </CardHeader>
         <CardContent>
-          <div className='flex justify-between items-center py-2'>
-            <Tabs value={view} onValueChange={setView} className="mb-4">
+          <div className='flex justify-between items-center py-4'>
+            <Tabs value={view} onValueChange={setView} className="">
               <TabsList>
                 <TabsTrigger value="month">Month</TabsTrigger>
                 {/* <TabsTrigger value="week">Week</TabsTrigger> */}

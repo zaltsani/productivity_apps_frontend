@@ -53,7 +53,10 @@ export const AddTodoItem = ({ currentDate, refetch }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="sm">
+        <Button
+          size="sm"
+          variant="blue"
+        >
           <Plus className="mr-1 h-4 w-4" />
           Add
         </Button>

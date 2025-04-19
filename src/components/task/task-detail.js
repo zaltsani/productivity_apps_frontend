@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Checkbox } from "../ui/checkbox";
-import { InputNoBorder } from "../ui/input";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { addSubTaskBody, deleteTaskBody, updateTaskBody } from "@/lib/data";
 import { PlusIcon, X } from "lucide-react";
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { TextInput } from "../ui/textarea";
 
 
 const handleAddSubtask = async( task, setTask ) => {
@@ -95,7 +94,7 @@ function ItemComponent({ task, setTask }) {
                   updateMutation.mutate(updateTaskDetail)
                 }}
               />
-              <InputNoBorder
+              <TextInput
                 defaultValue={taskDetail.body}
                 placeholder="Item"
                 onChange={e => {
@@ -104,7 +103,10 @@ function ItemComponent({ task, setTask }) {
                   // updateMutation.mutate(updateTaskDetail)
                   setInput(e.target.value)
                 }}
-                className={`field-sizing-content ${taskDetail.is_done ? "line-through" : ""}`}
+                className={`
+                  field-sizing-content ${taskDetail.is_done ? "line-through" : ""}
+                  px-3 py-2
+                `}
               />
             </div>
             <div>
@@ -118,39 +120,6 @@ function ItemComponent({ task, setTask }) {
               >
                 <X className="cursor-pointer hover:text-red-700 size-5" />
               </Button>
-              {/* <Dialog>
-                <DialogTrigger asChild>
-                  <X className="cursor-pointer hover:text-red-700 size-5" />
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Delete Task</DialogTitle>
-                  </DialogHeader>
-                  <div className="my-2">
-                    Are you sure you want to delete task?
-                  </div>
-                  <DialogFooter>
-                    <DialogClose asChild>
-                      <Button>Cancel</Button>
-                    </DialogClose>
-                    <DialogClose>
-                      <Button
-                        variant="destructive"
-                        onClick={() => {
-                          // setTask((prev) => ({
-                          //   ...prev,
-                          //   task_body: prev.task_body.filter((item) => item.id !== taskDetail.id)
-                          // }));
-                          handleDeleteSubtask(taskDetail.id, setTask)
-                          deleteTaskBody(taskDetail)
-                        }}
-                      >
-                        Delete
-                      </Button>
-                    </DialogClose>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog> */}
             </div>
           </div>
         </div>
@@ -319,3 +288,40 @@ export default function TaskDetail({ task, setTask }) {
           deleteTaskBody(taskDetail)
         }}
       /> */}
+
+
+
+
+              {/* <Dialog>
+                <DialogTrigger asChild>
+                  <X className="cursor-pointer hover:text-red-700 size-5" />
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Delete Task</DialogTitle>
+                  </DialogHeader>
+                  <div className="my-2">
+                    Are you sure you want to delete task?
+                  </div>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button>Cancel</Button>
+                    </DialogClose>
+                    <DialogClose>
+                      <Button
+                        variant="destructive"
+                        onClick={() => {
+                          // setTask((prev) => ({
+                          //   ...prev,
+                          //   task_body: prev.task_body.filter((item) => item.id !== taskDetail.id)
+                          // }));
+                          handleDeleteSubtask(taskDetail.id, setTask)
+                          deleteTaskBody(taskDetail)
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog> */}

@@ -41,7 +41,7 @@ export default function TaskPage() {
               </Button>
             </div>
           </CardHeader>
-          <CardContent className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <CardContent className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {!!task && task?.map(item => (
               <Task key={item.id} task={item} refetch={refetch} />
             ))}

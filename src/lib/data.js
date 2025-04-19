@@ -80,6 +80,11 @@ export const deleteTask = async (task) => {
   await AxiosInstance.delete(`api/v1/task/${task.id}/`)
 }
 
+
+// // // // // // // // //
+// Article and Journal
+// // // // // // // // //
+
 export const fetchArticleList = async () => {
   const res = await AxiosInstance.get(`api/v1/article/?category=article`)
   return res.data
@@ -120,7 +125,16 @@ export const updateArticle = async (article) => {
   return res
 }
 
-// Calendar To Do
+export const deleteArticle = async(article) => {
+  const res = await AxiosInstance.delete(`api/v1/article/${article.id}/`)
+  return res
+}
+
+
+// // // // // // //
+// Calendar To Do //
+// // // // // // //
+
 export const fetchTodoList = async () => {
   const res = await AxiosInstance.get(`api/v1/todo/`)
   return res.data

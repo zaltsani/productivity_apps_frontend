@@ -10,6 +10,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -42,7 +43,7 @@ const items = [
     icon: Wallet,
   },
   {
-    title: "Journal",
+    title: "Daily Journal",
     url: "/journal",
     icon: Notebook,
   },
@@ -80,6 +81,8 @@ const items = [
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
+  const { setOpenMobile } = useSidebar()
+  
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -101,8 +104,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className={`text-md ${pathname === item.url ? 'bg-sidebar-accent' : ''}`}>
-                    <Link href={item.url}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname === item.url}
+                    // className={`text-md ${pathname === item.url ? 'bg-sidebar-accent' : ''}`}
+                  >
+                    <Link href={item.url} onClick={() => setOpenMobile(false)}>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
