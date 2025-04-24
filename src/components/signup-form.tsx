@@ -15,17 +15,19 @@ import Link from "next/link"
 import { postRegister } from "@/lib/data"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { Loader2 } from "lucide-react"
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-
-  const [error, setError] = useState(null)
+  const [isPending, setIsPending] = useState(false)
+  const [error, setError] = useState([])
   const router = useRouter()
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault()
+    setIsPending(true)
     const form = e.currentTarget
     const username = form.elements.username.value
     const password1 = form.elements.password1.value
@@ -33,12 +35,15 @@ export function SignUpForm({
     const response = await postRegister(username, password1, password2)
     console.log("response", response)
     if (response.status === 400) {
-      if (response?.response?.non_field_errors) {
-        setError(response?.response?.data.non_field_errors[0])
+      if (response?.response?.data?.non_field_errors) {
+        setError(response?.response?.data?.non_field_errors)
+      } else {
+        setError(response?.response?.data?.password1)
       }
     } else if (response.status === 201) {
       router.push('/login')
     }
+    setIsPending(false)
   }
 
   return (
@@ -74,15 +79,18 @@ export function SignUpForm({
                 </div>
                 <Input id="password2" type="password" placeholder="Confirm Password" required />
               </div>
-              <Button type="submit" className="w-full">
-                Sign Up
+              <Button type="submit" className="w-full" disabled={isPending}>
+                {/* Sign Up */}
+                {!isPending ? <>Sign Up</> : <><Loader2 className="animate-spin" />Please wait</>}
               </Button>
-              {error && (
-                <div>{error}</div>
-              )}
+              <div className="text-red-500">
+              {error.length > 0 && error.map((item, index) => (
+                <div key={index}>{item}</div>
+              ))}
               {/* <Button variant="outline" className="w-full">
                 Login with Google
               </Button> */}
+            </div>
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}

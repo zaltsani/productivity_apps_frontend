@@ -19,8 +19,8 @@ export default function ArticleTable ({ articles, setArticles }) {
       <TableHeader>
         <TableRow>
           <TableHead>No.</TableHead>
-          <TableHead className="text-left">Title</TableHead>
-          <TableHead className="text-left">Description</TableHead>
+          <TableHead className="text-left min-w-[150px]">Title</TableHead>
+          <TableHead className="text-left min-w-[200px]">Description</TableHead>
           <TableHead>Action</TableHead>
         </TableRow>
       </TableHeader>

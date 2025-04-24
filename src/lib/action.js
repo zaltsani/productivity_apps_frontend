@@ -10,7 +10,7 @@ export async function authenticate(formData) {
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
-        case 'CredentialsSignin':
+        case 'credentials':
           return 'Invalid credentials.';
         default:
           return 'Something went wrong.';

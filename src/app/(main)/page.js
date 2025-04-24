@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { addArticle, addTask, fetchArticleList, fetchMe, fetchTask } from "@/lib/data";
 import { useState } from "react";
 import { useQuery } from "react-query";
+import { useCookies } from "next-client-cookies"
 
 export default function Home() {
   const listBreadcrumb = [
@@ -26,6 +27,12 @@ export default function Home() {
     fetchArticleList,
     {refetchOnWindowFocus: false, refetchOnMount: false, refetchOnReconnect: false, enabled: true, onSuccess: (data) => setArticles(data)},
   )
+
+  // const cookies = getCookie('accessToken')
+  // console.log("Cookies", cookies)
+
+  const cookies = useCookies()
+  console.log("Cookies", cookies.get("test"))
 
   return (
     <div className="w-full">

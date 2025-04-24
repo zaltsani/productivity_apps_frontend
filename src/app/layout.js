@@ -1,6 +1,7 @@
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
+import { CookiesProvider } from "next-client-cookies/server"
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -20,9 +21,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${space_grotesk.className} antialiased`}
       >
-        <Providers>
-          {children}
-        </Providers>
+        <CookiesProvider>
+          <Providers>
+            {children}
+          </Providers>
+        </CookiesProvider>
       </body>
     </html>
   );

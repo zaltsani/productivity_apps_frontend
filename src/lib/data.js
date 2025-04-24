@@ -176,10 +176,10 @@ export const updateTodo = async (data) => {
 
 
 // Finance
-export const fetchTransaction = async(limit, page) => {
+export const fetchTransaction = async(limit, page, start_date, end_date) => {
   const offset = limit * page
-  console.log("limit",limit,"offset",offset)
-  const res = await AxiosInstance.get(`api/v1/finance/transaction/?limit=${limit}&offset=${offset}`)
+  console.log("Fetch", start_date, end_date)
+  const res = await AxiosInstance.get(`api/v1/finance/transaction/?limit=${limit}&offset=${offset}&start_date=${start_date}&end_date=${end_date}`)
   return res.data
 }
 

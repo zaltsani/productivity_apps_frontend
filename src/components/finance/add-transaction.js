@@ -12,7 +12,7 @@ export const AddTransactionDialog = ({ refetchTransaction, refetchSummary }) => 
   const [type, setType] = useState("expense")
   const [amount, setAmount] = useState()
   const [category, setCategory] = useState(null)
-  const [date, setDate] = useState(null)
+  const [date, setDate] = useState(new Date())
   const [description, setDesciption] = useState(null)
   const [inputCategory, setInputCategory] = useState(null)
 
@@ -21,8 +21,6 @@ export const AddTransactionDialog = ({ refetchTransaction, refetchSummary }) => 
     fetchCategory,
     {refetchOnWindowFocus: false, refetchOnMount: false, refetchOnReconnect: false, enabled: true},
   )
-
-  // console.log("type", type, "amount", amount, "category", category, "date", date, "description", description)
 
   return (
     <Dialog>

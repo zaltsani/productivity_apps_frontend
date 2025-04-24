@@ -1,49 +1,79 @@
 import { format } from "date-fns";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
 import { Button } from "../ui/button";
-import { Pencil, Trash } from "lucide-react";
+import { ALargeSmall, AlignCenter, ArrowRightLeft, Banknote, Calendar, Pencil, Trash } from "lucide-react";
 import { deleteTransaction } from "@/lib/data";
 import { formatCurrency } from "@/lib/utils";
 
 export default function TransactionTable ({ transaction, refetchTransaction, refetchSummary, offset }) {
+  
   return (
     <Table>
       <TableHeader>
         <TableRow>
           <TableHead>No.</TableHead>
-          <TableHead>Amount</TableHead>
-          <TableHead>Type</TableHead>
-          <TableHead>Category</TableHead>
-          <TableHead>Date</TableHead>
-          <TableHead>Description</TableHead>
-          <TableHead>Action</TableHead>
+          <TableHead>
+            <div className="flex justify-center items-center gap-2">
+              <ArrowRightLeft /> Type
+            </div>
+          </TableHead>
+          <TableHead>
+            <div className="flex justify-center items-center gap-2">
+              <Banknote /> Amount
+            </div>
+          </TableHead>
+          <TableHead>
+            <div className="flex justify-center items-center gap-2">
+              <AlignCenter /> Category
+            </div>
+          </TableHead>
+          <TableHead>
+            <div className="flex justify-center items-center gap-2">
+              <Calendar /> Date
+            </div>
+          </TableHead>
+          <TableHead>
+            <div className="flex justify-center items-center gap-2">
+              <ALargeSmall /> Description
+            </div>
+          </TableHead>
+          <TableHead></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {transaction.length > 0 && transaction.map((item, index) => (
-          <TableRow key={index}>
+          <TableRow key={index} >
             <TableCell>{index+1+offset}</TableCell>
-            <TableCell>{formatCurrency(item.amount.split(".")[0])}</TableCell>
-            <TableCell>{item.type.charAt(0).toUpperCase() + item.type.slice(1)}</TableCell>
+            <TableCell
+              className={`font-semibold ${item.type === 'expense' ? 'text-red-600' : 'text-blue-700'}`}
+            >
+              {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
+            </TableCell>
+            <TableCell
+              // className={`font-semibold ${item.type === 'expense' ? 'text-red-600' : 'text-blue-700'}`}
+              className="font-medium"
+            >{formatCurrency(item.amount.split(".")[0])}</TableCell>
             <TableCell>{item.category?.name}</TableCell>
             <TableCell>{format(new Date(item.date), "MMM dd, yyyy")}</TableCell>
             <TableCell>{item.description}</TableCell>
-            <TableCell className="space-x-3">
-              <Button variant="icon" size='sm'>
-                <Pencil />
-              </Button>
-              <Button
-                variant="icon"
-                size='sm'
-                className=""
-                onClick={() => {
-                  deleteTransaction(item)
-                  refetchTransaction()
-                  refetchSummary()
-                }}
-              >
-                <Trash className="text-red-600" />
-              </Button>
+            <TableCell className="">
+              <div className="flex">
+                <Button variant="icon" size='sm'>
+                  <Pencil />
+                </Button>
+                <Button
+                  variant="icon"
+                  size='sm'
+                  className=""
+                  onClick={() => {
+                    deleteTransaction(item)
+                    refetchTransaction()
+                    refetchSummary()
+                  }}
+                >
+                  <Trash className="text-red-600" />
+                </Button>
+              </div>
             </TableCell>
           </TableRow>
         ))}

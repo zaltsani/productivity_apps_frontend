@@ -98,7 +98,7 @@ function DialogDeleteTask({ task, children, refetch }) {
         <div className="my-4">
           Are you sure you want to delete task?
         </div>
-        <DialogFooter>
+        <DialogFooter className='flex-row justify-end space-x-2'>
           <DialogClose asChild>
             <Button>Close</Button>
           </DialogClose>

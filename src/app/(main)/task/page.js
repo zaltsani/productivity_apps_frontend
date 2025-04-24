@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { addTask, fetchMe, fetchTask } from "@/lib/data"
 import { PlusIcon } from "lucide-react"
+import { useCookies } from "next-client-cookies"
 import { useQuery } from "react-query"
 
 export default function TaskPage() {
@@ -18,9 +19,14 @@ export default function TaskPage() {
     {refetchOnWindowFocus: false, refetchOnMount: false, refetchOnReconnect: false, enabled: true},
   )
 
+  const cookies = useCookies()
+
   return (
     <div className="w-full">
       <Header listBreadcrumb={listBreadcrumb} />
+      <Button
+        onClick={() => cookies.set("test", "This is Cookie")}
+      >Set Cookies</Button>
       <div className="my-0 sm:mx-10">
         <Card className="border-0">
           <CardHeader className="flex flex-col">

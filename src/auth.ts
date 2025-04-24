@@ -3,6 +3,7 @@ import { authConfig } from '@/auth.config';
 import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import AxiosInstance, { setAuthToken } from '@/lib/axiosInstance';
+import { cookies } from 'next/headers';
 
 type User = {
   id: string;
@@ -24,6 +25,17 @@ async function getUser(username: string, password: string): Promise<User | null>
       throw new Error("Authentication failed: No token");
     }
     console.log("Token", token)
+
+    const cookieStore = await cookies();
+    cookieStore.set("accessToken", token, {
+      httpOnly: true,
+      sameSite: "strict",
+    })
+    cookies().set("accessToken", token, {
+      httpOnly: true,
+      sameSite: "strict"
+    })
+
     setAuthToken(token)
 
     const resUser = await AxiosInstance.get(`api/v1/users/me`)
