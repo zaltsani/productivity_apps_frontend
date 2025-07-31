@@ -7,6 +7,12 @@ Aplikasi Self Development (Pengembangan Diri) yang memiliki fitur diantaranya:
 - Daily Journal
 
 ## Untuk Memulai
+Masuk ke repository backend.
+Mulai backend
+```bash
+python manage.py runserver
+```
+lalu ke folder frontend dan mulai dengan
 ```bash
 npm run dev
 ```
